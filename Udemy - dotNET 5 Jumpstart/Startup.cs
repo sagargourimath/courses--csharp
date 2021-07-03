@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Udemy___dotNET_5_Jumpstart.Services.CharacterService;
 
 namespace Udemy___dotNET_5_Jumpstart
 {
@@ -32,6 +33,8 @@ namespace Udemy___dotNET_5_Jumpstart
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "dotNET_5_Jumpstart", Version = "v1" });
             });
+
+            services.AddScoped<ICharacterService, CharacterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
