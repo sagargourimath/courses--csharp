@@ -49,15 +49,42 @@ namespace Udemy___dotNET_5_Jumpstart.Services.CharacterService
     public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
     {
       var serviceResponse = new ServiceResponse<GetCharacterDTO>();
-      Character character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
-      character.Name = updatedCharacter.Name;
-      character.HitPoints = updatedCharacter.HitPoints;
-      character.Strength = updatedCharacter.Strength;
-      character.Defence = updatedCharacter.Defence;
-      character.Intelligence = updatedCharacter.Intelligence;
-      character.Class = updatedCharacter.Class;
+            try
+            {
+                Character character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+                character.Name = updatedCharacter.Name;
+                character.HitPoints = updatedCharacter.HitPoints;
+                character.Strength = updatedCharacter.Strength;
+                character.Defence = updatedCharacter.Defence;
+                character.Intelligence = updatedCharacter.Intelligence;
+                character.Class = updatedCharacter.Class;
 
-      serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+                serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+            }
+            catch (System.Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+      return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int Id)
+    {
+      var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            try
+            {
+                Character character = characters.First(c => c.Id == Id);
+                characters.Remove(character);
+
+                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
 
       return serviceResponse;
     }
