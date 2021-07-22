@@ -12,5 +12,7 @@ namespace Udemy___dotNET_5_Jumpstart.Services.CharacterService
          Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id);
 
          Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter);
+
+         Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter);
     }
 }

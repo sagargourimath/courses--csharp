@@ -45,5 +45,21 @@ namespace Udemy___dotNET_5_Jumpstart.Services.CharacterService
 
       return serviceResponse;
     }
+
+    public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+    {
+      var serviceResponse = new ServiceResponse<GetCharacterDTO>();
+      Character character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+      character.Name = updatedCharacter.Name;
+      character.HitPoints = updatedCharacter.HitPoints;
+      character.Strength = updatedCharacter.Strength;
+      character.Defence = updatedCharacter.Defence;
+      character.Intelligence = updatedCharacter.Intelligence;
+      character.Class = updatedCharacter.Class;
+
+      serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+
+      return serviceResponse;
+    }
   }
 }

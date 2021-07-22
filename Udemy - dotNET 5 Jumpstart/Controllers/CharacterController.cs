@@ -36,5 +36,11 @@ namespace Udemy___dotNET_5_Jumpstart.Controllers
     {
       return Ok(await _characterService.AddCharacter(newCharacter));
     }
+
+    [HttpPut]
+    public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+    {
+      return Ok(await _characterService.UpdateCharacter(updatedCharacter));
+    }
   }
 }
