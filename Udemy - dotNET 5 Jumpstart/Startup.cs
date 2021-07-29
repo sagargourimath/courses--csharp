@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Udemy___dotNET_5_Jumpstart.Services.CharacterService;
+using Udemy___dotNET_5_Jumpstart.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Udemy___dotNET_5_Jumpstart
 {
@@ -28,6 +30,11 @@ namespace Udemy___dotNET_5_Jumpstart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options => 
+                options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection")
+                    ));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
